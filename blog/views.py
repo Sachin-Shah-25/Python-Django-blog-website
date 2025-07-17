@@ -283,6 +283,7 @@ def commentdel(request, id):
         return JsonResponse({"error": "Something went wrong "+e})
 
 def increaselike(request, id):
+    print("1")
     try:
         if not request.user.is_authenticated:
             return JsonResponse({"error": "Please log in"}, status=401)

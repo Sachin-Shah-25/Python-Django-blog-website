@@ -6,8 +6,8 @@ class blogmodel(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
     image=models.ImageField(upload_to="img/",null=True)
     title=models.CharField(max_length=100)
-    content=models.CharField()
-    category=models.CharField()
+    content=models.CharField(max_length=1000)
+    category=models.CharField(max_length=100)
     dateandtime=models.DateTimeField(default=datetime.now())
 
     def __str__(self):
@@ -18,7 +18,7 @@ class commentmodel(models.Model):
     id=models.AutoField(primary_key=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
     blog=models.ForeignKey(blogmodel,on_delete=models.CASCADE,blank=True,null=True)
-    comment=models.CharField()
+    comment=models.CharField(max_length=500)
     dateandtime=models.DateTimeField(default=datetime.now())
 
     def __str__(self):

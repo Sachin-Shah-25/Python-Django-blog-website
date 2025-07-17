@@ -1,0 +1,212 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/inde.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <!-- <link rel="stylesheet" href="CSS/footer.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+    <div id="loader"></div>
+    <div class="container">
+     
+        <div class="content">
+            <nav>
+                <div class="logo">
+                    <h1>SACHIN SHAH</h1>
+                </div>
+                <ul class="nav_ul">
+                    <li><a href="#">Home</a></li>
+                    {% if blogs|length > 1 %}
+                    <li><a href="/blog">Blog</a></li>
+                    {% endif %}
+                    <!-- <li><a href="./view.html">Blog</a></li> -->
+                    <li><a href="./contact" target="_blank">Contact</a></li>
+                    {%if request.user.is_authenticated %}
+                    <li><a href="./create" target="_blank">Create</a></li>
+                    <li><a href="./profile">Profile</a></li>
+                    <li><a href="./logout">Logout</a></li>
+                    {% else %}
+                    <li><a href="./signin">Login</a></li>
+                    {% endif %}
+
+                   
+                </ul>
+                <div id="burger" style="color: white;">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+            <div class="images_container">
+                <i class="fa-solid fa-arrow-left"></i>
+                <div class="image_slide">
+                    <img src="https://5.imimg.com/data5/SELLER/Default/2023/7/330479541/GU/EA/XX/6461830/nature-wallpaper-500x500.jpg"
+                        alt="">
+                    <img src="https://i0.wp.com/traveltoyournature.com/wp-content/uploads/2023/07/beautiful-nature-india-1-1024x768.jpeg?resize=1024%2C768"
+                        alt="">
+                    <img src="https://5.imimg.com/data5/SELLER/Default/2023/7/330479541/GU/EA/XX/6461830/nature-wallpaper-500x500.jpg"
+                        alt="">
+                    <img src="https://i0.wp.com/traveltoyournature.com/wp-content/uploads/2023/07/beautiful-nature-india-1-1024x768.jpeg?resize=1024%2C768"
+                        alt="">
+                    <div
+                        style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <p
+                            style="font-size: 30px; width: 100%; color: #7A7A7A; margin-left: 20px; font-weight: bolder;">
+                            Load More</p>
+                    </div>
+                    <div class="image_count">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+
+            <div class="blog_container">
+                <div class="blog_content">
+
+                    {% if blogs %}
+
+                    {% for blog in blogs %}
+                    <div class="blog">
+                        <div class="blog_image">
+                            <img src="{{blog.image.url}}" alt="">
+                        </div>
+                        <div class="blog_details" style="width: 100%;">
+                            <div class="blog_category" style="width: 100%;">
+                                <a href="/view/{{blog.id}}">{{blog.category|truncatechars:20}}</a>
+                            </div>
+
+                            <div class="blog_title" style="width: 100%;">
+                                <a  href="/view/{{blog.id}}">{{blog.title|truncatechars:23}}</a>
+                                <i class="fa-solid fa-heart" id="like_btn"></i>
+                                {{blog.liked}}
+                                <span style="display: none;" id="getBlogId">{{blog.id}}</span>
+
+                            </div>
+                            <div class="blog_discription">
+                                <a href="/view/{{blog.id}}">{{blog.content|truncatechars:120}}</a>
+                            </div>
+                            <div class="data_time">
+                                <p>{{blog.time}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+<!-- 
+
+                    <div class="blog">
+                        <div class="blog_image">
+                            <img src="https://i0.wp.com/traveltoyournature.com/wp-content/uploads/2023/07/beautiful-nature-india-1-1024x768.jpeg?resize=1024%2C768"
+                                alt="">
+                        </div>
+                        <div class="blog_details">
+                            <div class="blog_category">
+                                <a href="#">Nature</a>
+                            </div>
+
+                            <div class="blog_title">
+                                <a href="#">Coding Joureny</a>
+                                <i class="fa-solid fa-heart"></i>
+
+                            </div>
+                            <div class="blog_discription">
+                                <a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nihil id
+                                    explicabo eos optio quibusdam odio alias in. Reiciendis, officiis.</a>
+                            </div>
+                            <div class="data_time">
+                                <p>10 July 2025</p>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+
+            </div>
+        </div>
+ {% include "footer.html" %}
+    </div>
+</body>
+<script>
+  
+
+
+
+    const getLikeBtn = document.getElementById("like_btn");
+    const blog_title = document.querySelectorAll(".blog_title");
+    const getToggole = document.getElementById("burger");
+    const getNav_Ul = document.getElementsByClassName("nav_ul")[0];
+    const rightClick = document.getElementsByClassName('fa-arrow-right')[0];
+    const leftClick = document.getElementsByClassName('fa-arrow-left')[0];
+    const getAllImages = document.getElementsByClassName('image_slide')[0]
+    console.log(rightClick)
+    pos = 0
+    rightClick.addEventListener('click', () => {
+        console.log("YOu have cliec ")
+        if (pos <= 2000) {
+            pos = pos + 500
+            getAllImages.style.left = `${-pos}px`
+        }
+        else {
+            getAllImages.style.left = '0px'
+            pos = 0
+        }
+    })
+
+    leftClick.addEventListener('click', () => {
+        console.log("YOu have cliec ")
+        if (pos > 0) {
+            pos = pos - 500
+            getAllImages.style.left = `${-pos}px`
+        }
+
+    })
+
+    getToggole.addEventListener("click", () => {
+        console.log("burger")
+        getNav_Ul.classList.toggle("toggle")
+    })
+
+    Array.from(blog_title).forEach((elem) => {
+        
+        const like_btn= elem.querySelector("#like_btn")
+        
+        like_btn.addEventListener("click", () => {
+            getLikedId=like_btn.nextElementSibling.textContent;
+            console.log(getLikedId)
+            
+            fetch(`/view/likes/${getLikedId}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Something went Wrong ");
+                    }
+                    if (response.status==201){
+                        return;
+                    }
+                    window.location.reload()
+                })
+                .catch((error) => {
+                    console.error("Error : ", error)
+                })
+        })
+    })
+    
+
+</script>
+
+</html>

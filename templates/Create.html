@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <link rel="stylesheet" href="{% static 'css/create.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+</head>
+
+<body>
+    <div class="container">
+     
+         {% if messages %}
+                {% for message in messages %}
+                <span style="width: 100%;
+                background-color: rgb(243, 23, 23);
+                color: white;
+                display: block;
+                font-size: 18px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 5px 0;
+                text-align: center;
+                ">{{message}} </span>
+                {% endfor %}
+                {% endif %}
+        <div class="content_box">
+            
+            <div class="content">
+
+                <div class="left_side">
+                    <label style="display: block; cursor: pointer;" for="image" class="image">
+                        <input type="file" name="" id="image" accept="image/*" style="display: none;">
+                        {% if blog %}
+                        <img src="{{blog.image.url}}" id="blogimage" alt="">
+                        {% else %}
+                        <img src=""
+                        id="blogimage"
+                            alt="Preview not available">
+
+                        {% endif %}
+                        <div class="">
+                            <div class="line"></div>
+                            <div class="line_rotate"></div>
+                        </div>
+                    </label>
+                </div>
+                <div class="right_side">
+                    <form id="form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div>
+                            <label for="title">Title</label>
+                            {% if blog %}
+                            <input type="text" id="title" value="{{blog.title}}" name="title">
+                            {% else %}
+                            <input type="text" id="title" name="title">
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <label for="category">Category</label>
+                            {% if blog %}
+                            <input type="text" id="category" value="{{blog.category}}" name="category" id="">
+                            {% else %}
+                            <input type="text" id="category" name="category" id="">
+                            {% endif %}
+
+                        </div>
+                        <div>
+                            <label for="content">Discription</label>
+                            {% if blog %}
+                            <textarea name="content" rows="15" id="discription">{{blog.content}}</textarea>
+                            {% else %}
+                            <textarea name="content" rows="15" id="discription"></textarea>
+                            {% endif %}
+
+
+                        </div>
+                        <div>
+                            <label for="blogimage">Upload Image</label>
+                            <input style="border: none;" type="file" name="blogimage" accept="image/*" id="blogimage">
+                        </div>
+                        <div>
+                            <button>
+
+                                {% if blog %}
+                                Update
+                                {% else %}
+                                Create
+                                {% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+ 
+</script>
+</html>

@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View</title>
+    <link rel="stylesheet" href="{% static 'css/view.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="container" style="display: flex; flex-direction: column;">
+        {% if blogs %}
+        {% for blog in blogs %}
+        <div class="content">
+            <div class="blog_image">
+                <img src="{{blog.image.url}}" alt="Blog Image">
+            </div>
+            <div class="blog_detail">
+                <div class="blog_category">
+                    <h1><a href="/view/{{blog.id}}" 
+                        style="color: lightgreen;
+                        text-decoration: none;"
+                        >{{blog.category}}</a></h1>
+                </div>
+                <div class="blog_title">
+                    <h2>{{blog.title}}</h2>
+                </div>
+
+                <div class="create_by_detail">
+                    <div class="createby_name">
+                        <p>{{blog.user.username}}</p>
+                    </div>
+                    |
+                    <div class="blog_date">
+                        <p>{{blog.dateandtime}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bd"></div>
+            <blog class="blog_discription">
+                <p>{{blog.content}}</p>
+            </blog>
+            <div class="bd"></div>
+
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% include "footer.html" %}
+    </div>
+</body>
+<script>
+
+</script>
+
+</html>

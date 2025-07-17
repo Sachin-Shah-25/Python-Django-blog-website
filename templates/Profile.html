@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+</head>
+
+<body>
+    <div class="container">
+       
+        <div class="content">
+            <div class="left_side">
+                <label class="img" for="img">
+                    <input type="file" name="" id="img">
+                    <img src="{{getProfile}}"
+                        alt="">
+                </label>
+            </div>
+            <div class="right_side">
+                <h1 id="profile_update"><a href="/">Profile Update</a></h1>
+                <div id="userid">
+                    <span>Username :- </span>
+                    <p>{{request.user.username}}</p>
+                </div>
+                <div class="user_detail">
+                    <div>
+                        <span>First Name :- </span>
+                        <p>{{request.user.username}}</p>
+                    </div>
+                   
+                    <div>
+                        <span>Email Id :- </span>
+                        <p>{{request.user.email}}</p>
+                    </div>
+                </div>
+
+                <h3>My Post :-</h3>
+                <div class="myposts" style="row-gap: 50px;">
+                    {% if blogs %}
+                    {% for blog in blogs %}
+                    <div class="posts">
+                        <div class="image">
+                            <img src="{{blog.blogimage}}"
+                                alt="">
+                        </div>
+                        <div class="post_detail">
+                            <div class="post_category">
+                                <span>{{blog.category}}</span>
+                            </div>
+                            <div class="post_title">
+                                <p>{{blog.title}}</p>
+                            </div>
+                            <div class="post_content">
+                                <p>{{blog.content}}</p>
+                            </div>
+                            <div class="date_time_likes">
+                                <p>{{blog.dateandtime}}</p>
+                                <span>Likes : {{blog.liked}}</span>
+                            </div>
+                            <div class="buttons">
+                                <button><a href="/delete/{{blog.id}}" 
+                                    style="text-decoration: none;
+                                    font-weight: bold;
+                                    color: white;
+                                    width: 100%;"
+                                    >Delete</a></button>
+                                 <button><a href="/update/{{blog.id}}" 
+                                    style="text-decoration: none;
+                                    font-weight: bold;
+                                    color: white;
+                                    width: 100%;"
+                                    >Edit</a></button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

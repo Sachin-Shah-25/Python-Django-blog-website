@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+</head>
+<body>
+
+    <div class="container">
+       
+        <div class="auth_form">
+            <div class="auth_type">
+                   {% if messages %}
+                {% for message in messages %}
+                <span style="width: 100%;
+                background-color: rgb(243, 23, 23);
+                color: white;
+                display: block;
+                font-size: 18px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 5px 0;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                ">{{message}} </span>
+                {% endfor %}
+                {% endif %}
+                <h1>SIGN UP</h1>
+            </div>
+            <form id="form" method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+                <div>
+                   <i class="fa-solid fa-user"></i>
+                   <input type="text" name="username" placeholder="User Name" id=""> 
+                </div>
+                <div>
+                    <i class="fa-solid fa-envelope"></i>
+                   <input type="email" name="useremail" placeholder="User Email" id=""> 
+                </div>
+                <div>
+                    <i class="fa-solid fa-lock"></i>
+                   <input type="password"  placeholder="Create Password" name="password1" id="password1"> 
+                </div>
+                <div>
+                    <i class="fa-solid fa-lock"></i>
+                   <input type="password"  placeholder="Confirm Password" name="password2" id=""> 
+                </div>
+                 <div>
+                   <input type="file" accept="image/*" name="userimage" id=""> 
+                </div>
+
+                <div id="btn">
+                    <button>SignUp</button>
+                </div>
+                <span id="span">
+                    Already account ? <a href="/signin">SignIn</a>
+                </span>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    
+</script>
+</html>
